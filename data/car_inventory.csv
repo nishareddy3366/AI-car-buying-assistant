@@ -1,0 +1,6 @@
+make,model,year,price,condition,body_style,mileage
+Toyota,Camry,2020,22000,Used,Sedan,30000
+Honda,Civic,2019,19000,Used,Sedan,40000
+Ford,Escape,2021,27000,New,SUV,0
+Tesla,Model 3,2022,35000,New,Sedan,0
+Hyundai,Elantra,2018,15000,Used,Sedan,50000
