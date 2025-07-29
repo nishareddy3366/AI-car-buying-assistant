@@ -1,48 +1,63 @@
-import os
-from vector_store.retriever import populate_chromadb, search_cars, CHROMA_PATH
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+from reteriver.retriever import search_cars
 from generator.generator import generate_answer
+from guardrails.guardrails import is_safe_input, is_safe_output
 
+app = FastAPI(title="AI Car Buying Assistant")
+
+# For storing simple chat history (in-memory)
 history = []
 
-def run_chat():
-    query = input("\n🧑 User: ").strip()
-    if not query:
-        print("❗ Please enter a valid query.")
-        return
-    history.append({"user": query})
+# Request schema
+class Query(BaseModel):
+    message: str
 
-    results = search_cars(query)
+# Response schema (optional but clean)
+class ChatResponse(BaseModel):
+    response: str
+    # top_matches: list[str] = []
+    # metadata: list[dict] = []
+    # flagged: bool = False
+
+@app.post("/chat", response_model=ChatResponse)
+async def chat_with_assistant(query: Query):
+    user_input = query.message.strip()
+
+    if not user_input:
+        raise HTTPException(status_code=400, detail="Empty message.")
+
+    if not is_safe_input(user_input):
+        return ChatResponse(
+            response="❌ Your message was flagged as unsafe or off-topic. Please ask a car-related and respectful question.",
+            flagged=True
+        )
+
+    history.append({"user": user_input})
+
+    results = search_cars(user_input)
     top_docs = results["documents"][0]
+    metadata = results["metadatas"][0]
 
-    # ✅ Fallback when no relevant cars are found
     if not top_docs:
         fallback_message = (
             "Sorry, I couldn't find any matching cars in the inventory for your request.\n"
             "You can try rephrasing your query or ask about a different make, model, or price range."
         )
-        print(f"\n🤖 AI Car Assistant: {fallback_message}")
         history.append({"assistant": fallback_message})
-        return
-
-    print("\n🔍 Top Matches:")
-    for doc, meta in zip(top_docs, results["metadatas"][0]):
-        print(f"✅ {doc}")
-        print(f"ℹ️  Metadata: {meta}")
-        print("---")
+        return ChatResponse(response=fallback_message)
 
     context = "\n".join(top_docs)
-    structured_response = generate_answer(query, context)
+    structured_response = generate_answer(user_input, context)
+    final_output = structured_response.content
 
-    print("\n🤖 AI Car Assistant Suggestion:")
-    print(f"🚗 Recommendation: {structured_response.content}")
-    # print(f"💡 Reason: {structured_response.reason}")
+    if not is_safe_output(final_output):
+        final_output = "⚠️ This response was filtered due to safety or quality issues. Please try rephrasing your query."
 
-    history.append({"assistant": structured_response.model_dump()})
+    history.append({"assistant": final_output})
 
-if __name__ == "__main__":
-    while True:
-        try:
-            run_chat()
-        except KeyboardInterrupt:
-            print("\n👋 Exiting assistant. Bye!")
-            break
+    return ChatResponse(
+        response=final_output
+        # top_matches=top_docs,
+        # metadata=metadata
+    )
