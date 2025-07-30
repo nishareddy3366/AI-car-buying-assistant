@@ -1,6 +1,6 @@
 import random
 import pandas as pd
-from vector_store.retriever import populate_chromadb
+from retriever.retriever import populate_chromadb
 
 # Expanded base patterns based on California Car Online inventory :contentReference[oaicite:4]{index=4}
 base_data = [
@@ -12,12 +12,12 @@ base_data = [
     {"make": "Tesla",    "model": "Model Y",    "condition": "New",      "body_style": "SUV",    "fuel_type": "Electric"},
     {"make": "Toyota",   "model": "Corolla",    "condition": "Certified","body_style": "Sedan",  "fuel_type": "Hybrid"},
     {"make": "Hyundai",  "model": "Santa Fe",   "condition": "Used",     "body_style": "SUV",    "fuel_type": "Gasoline"},
-    {"make": "Mazda",    "model": "CX-5",       "condition": "Used",     "body_style": "SUV",    "fuel_type": "Gasoline"},
+    {"make": "Mazda",    "model": "CX-5",       "condition": "New",     "body_style": "SUV",    "fuel_type": "Gasoline"},
     {"make": "Nissan",   "model": "Altima",     "condition": "Used",     "body_style": "Sedan",  "fuel_type": "Gasoline"},
     {"make": "Ford",     "model": "Mustang",    "condition": "Used",     "body_style": "Coupe",  "fuel_type": "Gasoline"},
     {"make": "Audi",     "model": "Q5",         "condition": "Certified","body_style": "SUV",    "fuel_type": "Gasoline"},
     {"make": "Kia",      "model": "Sorento",    "condition": "Used",     "body_style": "SUV",    "fuel_type": "Gasoline"},
-    {"make": "Lexus",    "model": "RX 350",     "condition": "Used",     "body_style": "SUV",    "fuel_type": "Gasoline"},
+    {"make": "Lexus",    "model": "RX 350",     "condition": "New",     "body_style": "SUV",    "fuel_type": "Gasoline"},
 ]
 
 def generate_description(base, year, price, msrp, mileage):

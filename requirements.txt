@@ -2,6 +2,8 @@ fastapi
 uvicorn
 pydantic
 langchain
-openai
 chromadb
 python-dotenv
+streamlit
+requests
+

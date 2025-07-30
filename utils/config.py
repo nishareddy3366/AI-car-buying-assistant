@@ -8,6 +8,7 @@ API_KEY = "AIzaSyC6_BxvOzwB24K2tj7c70CHr220kpnswjY"
 CHROMA_PATH = "chroma_storage"
 CSV_PATH = "data/car_inventory.csv"
 genai.configure(api_key=API_KEY)
+DB_PATH = "utils/chat_history.db" 
 
 # 🔧 LLM Setup
 llm = ChatGoogleGenerativeAI(

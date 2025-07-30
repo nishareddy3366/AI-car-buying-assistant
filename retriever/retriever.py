@@ -1,7 +1,7 @@
 
 import pandas as pd
 import chromadb
-from config import CHROMA_PATH, CSV_PATH, genai
+from utils.config import CHROMA_PATH, CSV_PATH, genai
 
 
 

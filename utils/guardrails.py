@@ -1,6 +1,6 @@
 from langchain_core.prompts import PromptTemplate
-from config import llm  # uses Gemini
-from prompt.prompt import input_guardrail_template, output_guardrail_template
+from utils.config import llm  # uses Gemini
+from prompts.prompt import input_guardrail_template, output_guardrail_template
 
 # --- Guardrail Functions ---
 
