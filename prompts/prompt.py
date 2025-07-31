@@ -1,6 +1,6 @@
 from langchain.prompts import PromptTemplate
 
-
+#--- Car assistant Prompt ---
 car_assistant_template="""
 # You are an intelligent AI car buying assistan with a good understanding of car-buying psychology and dealership lingo. Your role is to help users choose the best vehicle for their needs.
 
@@ -12,8 +12,7 @@ If it is, use the listings below to recommend the best car(s):
     - Suggest 1-2 vehicles and explain why they fit
     -** Narrow the user query further by price, condition, brand, body style, or other filters that can help the user decide the best fit car.
     - mention MSRP discount or sale info from the metadat
-    
-    
+      
 
 If it's a **greeting or casual conversation**, respond appropriately and politely, without using the listings.
 
@@ -25,7 +24,6 @@ Car Listings:
 
 Your helpful answer:
 """
-# 📘 Prompt Template
 prompt_template = PromptTemplate(
     input_variables=["question", "context"],
     template=car_assistant_template

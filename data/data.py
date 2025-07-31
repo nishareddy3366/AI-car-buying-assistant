@@ -1,6 +1,6 @@
 import random
 import pandas as pd
-from retriever.retriever import populate_chromadb
+from retriever.retriever import build_vector_store
 
 # Expanded base patterns based on California Car Online inventory :contentReference[oaicite:4]{index=4}
 base_data = [
@@ -20,13 +20,16 @@ base_data = [
     {"make": "Lexus",    "model": "RX 350",     "condition": "New",     "body_style": "SUV",    "fuel_type": "Gasoline"},
 ]
 
+# Function to generate a human-readable description for each car listing
 def generate_description(base, year, price, msrp, mileage):
     cond = base["condition"].lower()
     return (f"A {year} {base['make']} {base['model']} ({cond}), "
             f"{base['body_style']} with {mileage} miles, "
             f"priced at ${price} (MSRP: ${msrp}).")
 
-synthetic = []
+synthetic = [] # List to store all the generated synthetic car listings
+
+# Generate 350 random synthetic car entries
 for _ in range(350):
     base = random.choice(base_data)
     year = random.randint(2018, 2025)
@@ -50,7 +53,12 @@ for _ in range(350):
         "description": desc
     })
 
+# Convert to DataFrame and save as CSV
 df = pd.DataFrame(synthetic)
 df.to_csv(r"C:\Users\Nikhil\Documents\ai-car-assistant\data\car_inventory.csv", index=False)
-populate_chromadb()
+
+# Build vector store from the generated data
+build_vector_store()
+
+# Final confirmation
 print("✅ Saved enhanced dataset with 350 listings to 'data/enhanced_car_inventory.csv'")

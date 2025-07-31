@@ -65,7 +65,7 @@ AI-car-buying-assistant/
 
 ### 1. Start the FastAPI backend
 ```bash
-python uvicorn main:app --reload
+uvicorn main:app --reload
 ```
 - Runs on: `http://localhost:8000`
 
@@ -203,4 +203,8 @@ It's brand new with 0 miles, offering you the latest technology and electric per
 Would you like to know more about its features, or perhaps explore other criteria like specific body styles or brands for future options?
 
 ```
-
+## Maintainer
+**M N Nisha**  
+For suggestions or collaborations, feel free to:  
+- [Connect on LinkedIn](https://www.linkedin.com/in/nishareddy030399)  
+- Raise an [Issue](https://github.com/nishareddy3366/AI-car-buying-assistant/tree/main) or submit a PR

@@ -44,7 +44,7 @@ async def chat_with_assistant(query: Query):
     
 
     if not is_safe_output(final_output):
-        final_output = "⚠️ This response was filtered due to safety or quality issues. Please try rephrasing your query."
+        final_output = "This response was filtered due to safety or quality issues. Please try rephrasing your query."
 
     save_to_history(session_id, "assistant", final_output)
     
