@@ -28,7 +28,7 @@ Your helpful answer:
 # 📘 Prompt Template
 prompt_template = PromptTemplate(
     input_variables=["question", "context"],
-    template=template_1
+    template=car_assistant_template
 )
 
 #--- Input Moderation Prompt ---
