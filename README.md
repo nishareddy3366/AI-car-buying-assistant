@@ -43,6 +43,11 @@ AI-car-buying-assistant/
    git clone <repo-url>
    cd AI-car-buying-assistant-main
    ```
+2. **Create Virtual Environment**   
+    ```bash
+   python -m venv venv
+   venv\Scripts\activate
+    ```
 
 2. **Install dependencies**  
    ```bash
