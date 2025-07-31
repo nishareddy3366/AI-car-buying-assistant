@@ -54,8 +54,10 @@ AI-car-buying-assistant/
    pip install -r requirements.txt
    ```
 
-3. **Ensure the dataset is present**  
-   - `data/car_inventory.csv` is required for car retrieval.
+3. **Ensure the dataset is present and API key is configured**
+
+   - The file `data/car_inventory.csv` is required for car retrieval.
+   - Replace any placeholder API key in the code with your actual API key (if applicable).
 
 ---
 

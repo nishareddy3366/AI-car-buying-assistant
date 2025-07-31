@@ -4,7 +4,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 
 
 # API Key
-API_KEY = "AIzaSyC6_BxvOzwB24K2tj7c70CHr220kpnswjY" 
+API_KEY = "YOUR-API-KEY" 
 CHROMA_PATH = "chroma_storage"
 CSV_PATH = "data/car_inventory.csv"
 genai.configure(api_key=API_KEY)
