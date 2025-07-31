@@ -58,7 +58,7 @@ AI-car-buying-assistant/
 
 ### 1. Start the FastAPI backend
 ```bash
-python main.py
+python uvicorn main:app --reload
 ```
 - Runs on: `http://localhost:8000`
 
